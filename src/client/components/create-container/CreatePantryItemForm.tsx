@@ -35,8 +35,8 @@ const CreatePantryItemForm = ( {onItemCreated }: CreatePantryItemFormProps) => {
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
 
-    // if (!data) return;
-
+// if (!data) return;
+// Don't need a proxy set up in vite.config.ts because explicitly using full URL with http://localhost:3000/create in  fetch call. A proxy is only needed if want to make relative URL requests (like "/create") and have them automatically forwarded to your backend.
     try {
       const response = await fetch('http://localhost:3000/create', {
         method: 'POST',
