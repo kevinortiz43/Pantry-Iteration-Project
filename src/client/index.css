@@ -13,8 +13,7 @@ html, body {
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
-   color: var(--text-icons-color);
+  color: var(--text-icons-color);
   background-color: var(--background-color);
 }
 

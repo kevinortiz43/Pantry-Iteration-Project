@@ -11,9 +11,6 @@ import PantryItemContainer from './components/pantry/PantryItemContainer'
 
 
 function App() {
-
-  
-
   return (
     <>
      <div className="app-container">
@@ -22,7 +19,6 @@ function App() {
       {/* <CreatePantryItemContainer/>
       <PantryItemContainer/> */}
       < Footer />
-
      </div>
      
     </>

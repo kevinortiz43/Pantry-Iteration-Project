@@ -15,7 +15,6 @@ const PantryPage = () => {
     return (
         <div>
             <section>
-                <h2>Add new item</h2>
                 <CreatePantryItemContainer onItemCreated={handleItemCreated}/>
             </section>
 
