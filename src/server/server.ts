@@ -19,9 +19,8 @@ const uri = process.env.MONGO_URI;
 
 export const connectDb = async () => {
   try {
-    await mongoose.connect("mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0");
+    await mongoose.connect(String(uri));
     console.log("connected to mongo db testing ");
-    console.log(process.env.MONGO_URI)
   } catch (error) {
     console.log("Error connecting to MONGODB", error);
     process.exit(1); // exit with failure
@@ -33,7 +32,8 @@ const pantryRouter = express.Router();
 //home page
 app.use('/', pantryRouter);
 
-//getPantryItem */
+//getPantryItem */ 
+//  WORKS in Postman
 pantryRouter.get(
   '/:name',
   pantryController.getPantryItem,
@@ -42,19 +42,13 @@ pantryRouter.get(
   }
 );
 
+// WORKS in Postman
 //getting the full inventory
 pantryRouter.get(
   '/',
   pantryController.getPantryInventory,
   (req: Request, res: Response) => {
     res.status(200).json(res.locals.inventory);
-  }
-);
-pantryRouter.get(
-  '/',
-  pantryController.getPantryInventory,
-  (req: Request, res: Response) => {
-    res.status(200).json('testing get request' + res.locals.inventory);
   }
 );
 

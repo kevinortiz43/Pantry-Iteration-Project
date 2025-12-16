@@ -13,11 +13,9 @@ import './createContainer.css';
 type FormFields = {
   _id?: string;
   name: string;
-  category?: string;
+  category: string;
   quantity: number;
-  // unitType?: string;
-  notifyWhen?: number;
-  // expirationDate?: Date;
+  notifyWhen: number;
 };
 
 // need to create a callback to notify parent component PantryPage.tsx
