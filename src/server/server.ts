@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT: string | number = process.env.PORT || 3000;
 
+const uri = process.env.MONGO_URI;
 
 export const connectDb = async () => {
   try {

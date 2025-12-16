@@ -5,13 +5,14 @@ interface PantryItemType {
   name: string;
   category?: string;
   quantity: number;
-  unitType?: string;
-  threshold?: number;
+  notifyWhen?: number;
+  // unitType?: string;
+  // threshold?: number;
   // expirationDate?: string;
   onButtonClick?: () => void;
   // buttonText?: string;
   buttonDisabled?: boolean;
-  }
+}
 
 interface PantryItemProps {
   pantryItem: PantryItemType;
@@ -31,37 +32,38 @@ interface PantryItemProps {
 
 const PantryItem = ({ pantryItem }: PantryItemProps) => {
   // deconstruct pantryItem
-  const { name, category, quantity, unitType, threshold, onButtonClick, buttonDisabled = false } =
-    pantryItem;
+  const { name, category, quantity, notifyWhen, onButtonClick, buttonDisabled = false } =
+  // const { name, category, quantity, unitType, threshold, onButtonClick, buttonDisabled = false } =
+  pantryItem;
 
-    
-    const handleClick = () => {
-      if (onButtonClick) {
-        onButtonClick();
-      }
-     console.log("button works"); 
+
+  const handleClick = () => {
+    if (onButtonClick) {
+      onButtonClick();
     }
+    console.log("button works");
+  }
   return (
     <>
       <article className='pantry-card'>
-        
-          <h3 className='name'> { name.toUpperCase() }</h3>
-          <ul className='listItems'>
-            {category && <li className='category'>Category: { category.toLowerCase() }</li>}
-            <li className='quantity'>Quantity: { quantity }</li>
-           {unitType && <li className='unitType'>Unit: { unitType.toLowerCase() }</li>}
-            {threshold && <li className='threshold'>Buy more if you have less than { threshold }</li>}
-           {/* {expirationDate && <li className='expirationDate'>Expiration date: { formatExpirationDate(expirationDate) }</li>} */}
-          </ul>
-          <div className="button-container">
-           <button onClick={handleClick}
-          disabled={buttonDisabled}
-          className="button">Update Item</button>
+
+        <h3 className='name'> {name.toUpperCase()}</h3>
+        <ul className='listItems'>
+          {category && <li className='category'>Category: {category.toLowerCase()}</li>}
+          <li className='quantity'>Quantity: {quantity}</li>
+          {/* {unitType && <li className='unitType'>Unit: { unitType.toLowerCase() }</li>} */}
+          {notifyWhen && <li className='notifyWhen'>Buy more if you have less than {notifyWhen}</li>}
+          {/* {expirationDate && <li className='expirationDate'>Expiration date: { formatExpirationDate(expirationDate) }</li>} */}
+        </ul>
+        <div className="button-container">
           <button onClick={handleClick}
-          disabled={buttonDisabled}
-          className="button">Delete Item</button>
-          </div>
-        
+            disabled={buttonDisabled}
+            className="button">Update Item</button>
+          <button onClick={handleClick}
+            disabled={buttonDisabled}
+            className="button">Delete Item</button>
+        </div>
+
       </article>
     </>
   );

@@ -1,11 +1,11 @@
 import './createContainer.css';
 import CreatePantryItemForm from './CreatePantryItemForm';
 
-const CreatePantryItemContainer = () => {
+const CreatePantryItemContainer = ( {onItemCreated}: CreateItemContainerProps) => {
   return (
     <>
       <div className='create-container'>
-      <CreatePantryItemForm />
+      <CreatePantryItemForm onItemCreated={onItemCreated}/>
       </div>
     </>
   );

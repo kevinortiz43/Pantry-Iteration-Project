@@ -1,21 +1,26 @@
 
 import Header from './components/header/Header'
-import CreatePantryItemContainer from './components/create-container/CreatePantryItemContainer'
+// import CreatePantryItemContainer from './components/create-container/CreatePantryItemContainer'
 import Footer from './components/footer/Footer'
+// import PantryItemContainer from './components/pantry/PantryItemContainer'
+import PantryPage from './components/pantry/PantryPage'
+
+import './App.css'
+import CreatePantryItemContainer from './components/create-container/CreatePantryItemContainer'
 import PantryItemContainer from './components/pantry/PantryItemContainer'
 
 
-import './App.css'
-
 function App() {
+
   
 
   return (
     <>
      <div className="app-container">
       < Header />
-      < CreatePantryItemContainer />
-      < PantryItemContainer />
+      <PantryPage/>
+      {/* <CreatePantryItemContainer/>
+      <PantryItemContainer/> */}
       < Footer />
 
      </div>

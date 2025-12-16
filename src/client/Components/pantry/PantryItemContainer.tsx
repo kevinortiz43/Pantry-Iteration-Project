@@ -8,12 +8,17 @@ interface PantryItemType {
   name: string;
   category?: string;
   quantity: number;
-  unitType?: string;
-  threshold?: number;
+  // unitType?: string;
+  notifyWhen?: number;
   // expirationDate?: string;
 }
 
-const PantryItemContainer = () => {
+interface PantryItemContainerProps  {
+  refreshKey?: number;
+
+}
+
+const PantryItemContainer = ( {refreshKey = 0}: PantryItemContainerProps ) => {
   const [pItems, setPItems] = useState<PantryItemType[]>([]);
 
   useEffect(() => {
@@ -29,7 +34,7 @@ const PantryItemContainer = () => {
     }
     getPantryItems();
     return;
-  }, []);
+  }, [refreshKey]); // trigger refresh 
 
   console.log(`Items: ${pItems}`);
 

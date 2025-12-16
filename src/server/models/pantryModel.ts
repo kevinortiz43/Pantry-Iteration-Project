@@ -15,18 +15,18 @@ const pantryItemSchema = new mongoose.Schema({
     required: [true, 'Quantity is required'],
     min: 1,//do we want a minimum quantity of 1?
   },
-  unitType: {
-    type: String,
-    required: false,
-  },
-  threshold: {
+  // unitType: {
+  //   type: String,
+  //   required: false,
+  // },
+  notifyWhen: {
     type: Number,
     required: false,
   },
-  expirationDate: {
-    type: Date, 
-    required: false, 
-  },
+  // expirationDate: {
+  //   type: Date, 
+  //   required: false, 
+  // },
 });
 
 const PantryItem = mongoose.model('PantryItem', pantryItemSchema);
