@@ -33,7 +33,9 @@ const pantryRouter = express.Router();
 app.use('/', pantryRouter);
 
 //getPantryItem */ 
+
 //  WORKS in Postman
+// GET by item name
 pantryRouter.get(
   '/:name',
   pantryController.getPantryItem,
@@ -43,7 +45,7 @@ pantryRouter.get(
 );
 
 // WORKS in Postman
-//getting the full inventory
+//GET full inventory
 pantryRouter.get(
   '/',
   pantryController.getPantryInventory,
@@ -52,7 +54,8 @@ pantryRouter.get(
   }
 );
 
-//updating pantry items
+// WORKS in Postman
+//patch update item by name
 pantryRouter.patch(
   '/:name',
   pantryController.updatePantryItem,
@@ -61,7 +64,8 @@ pantryRouter.patch(
   }
 );
 
-//delete pantry item
+// WORKS in Postman
+//DELETE item by nasme
 pantryRouter.delete(
   '/:name',
   pantryController.deletePantryItem,
@@ -72,16 +76,8 @@ pantryRouter.delete(
   }
 );
 
-//redirecting to full inventory
-pantryRouter.get(
-  '/inventory',
-  pantryController.getPantryInventory,
-  (req: Request, res: Response) => {
-    res.redirect('/');
-  }
-);
-
-//create pantry item
+// WORKS in Postman
+//create item
 pantryRouter.post(
   '/create',
   pantryController.createPantryItem,
@@ -91,23 +87,23 @@ pantryRouter.post(
 );
 
 //health check
-app.get('/health', (_req: Request, res: Response) => {
-  res.status(200).send('Server is running');
-});
+// app.get('/health', (_req: Request, res: Response) => {
+//   res.status(200).send('Server is running');
+// });
 
-app.use((req, res) =>
-  res.status(404).send("This is not the page you're looking for...")
-);
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
-    status: 500,
-    message: { err: 'An error occurred' },
-  };
-  const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
-  return res.status(errorObj.status).json(errorObj.message);
-});
+// app.use((req, res) =>
+//   res.status(404).send("This is not the page you're looking for...")
+// );
+// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+//   const defaultErr = {
+//     log: 'Express error handler caught unknown middleware error',
+//     status: 500,
+//     message: { err: 'An error occurred' },
+//   };
+//   const errorObj = Object.assign({}, defaultErr, err);
+//   console.log(errorObj.log);
+//   return res.status(errorObj.status).json(errorObj.message);
+// });
 
 app.listen(PORT, () => {
     console.log(`${process.env.PORT}`)

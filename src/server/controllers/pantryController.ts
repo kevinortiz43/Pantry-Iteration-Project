@@ -87,7 +87,7 @@ const pantryController = {
     }
   },
 
-  //update: Patch(stretch)
+  //update: patch 
   async updatePantryItem(
     req: Request,
     res: Response,
