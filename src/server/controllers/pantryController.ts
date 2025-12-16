@@ -100,7 +100,7 @@ const pantryController = {
       const updatedPantryItem = await PantryItem.findOneAndUpdate(
         { name: currentItem },
         { $set: updates },
-        { new: true }
+        { new: true, runValidators: true } // runs schema validators on update
       );
 
       if (!updatedPantryItem) {
@@ -109,6 +109,8 @@ const pantryController = {
           .json({ message: `Pantry item ${currentItem} not found.` });
         return;
       }
+
+
       res.locals.updatedPantryItem = updatedPantryItem;
       return next();
     } catch (err) {

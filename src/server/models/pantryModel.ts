@@ -19,6 +19,7 @@ const pantryItemSchema = new mongoose.Schema({
   notifyWhen: {
     type: Number,
     required: true,
+    min: 0,//do we want a minimum quantity of 1?
     default: 0,
   },
 });
