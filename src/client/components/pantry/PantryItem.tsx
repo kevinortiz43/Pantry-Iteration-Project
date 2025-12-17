@@ -1,3 +1,4 @@
+import { useState, type SetStateAction } from "react";
 import { X } from "lucide-react";
 import "./pantry.css";
 
@@ -46,6 +47,24 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
     // const { name, category, quantity, unitType, threshold, onButtonClick, buttonDisabled = false } =
     pantryItem;
 
+  const [updateName, setUpdateName] = useState(name);
+  const [updateCategory, setUpdateCategory] = useState(category);
+  const [updateQuantity, setUpdateQuantity] = useState(quantity);
+  const [updateNotifyWhen, setNotifyWhen] = useState(notifyWhen);
+
+  const [isEditing, setIsEditing] = useState(true); // check to see if being edited
+
+  // use some kind of state to track form
+  const [formData, setFormData] = useState({
+    // ...pantryItem, // make copy of entire pantryItem
+    // quantity: pantryItem.quantity || 1,
+    // notifyWhen: pantryItem.notifyWhen || 0,
+  });
+
+  const handleIsEditing = () => {
+    setIsEditing((prev) => !prev);
+  };
+
   const deleteItemClick = async (name: string) => {
     console.log(name);
 
@@ -63,12 +82,12 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
     }
   };
 
-  const handleClick = () => {
-    if (onButtonClick) {
-      onButtonClick();
-    }
-    console.log("button works");
+  const handleChange = (event: {
+    target: { value: SetStateAction<string> };
+  }) => {
+    setUpdateName(event.target.value);
   };
+
   return (
     <>
       <article className="pantry-card">
@@ -80,21 +99,59 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
             <X strokeWidth={1.25} />
           </button>
         </div>
-        <h3 className="name"> {name.toUpperCase()}</h3>
+        {isEditing ? (
+          <h3 className="name"> {name.toUpperCase()}</h3>
+        ) : (
+          <form className="name">
+            <input
+              type="text"
+              value={updateName.toUpperCase()}
+              onChange={handleChange}
+            ></input>
+          </form>
+        )}
+
         <ul className="listItems">
-          {category && (
-            <li className="category">Category: {category.toLowerCase()}</li>
+          {isEditing ? (
+            category && (
+              <li className="category">Category: {category.toLowerCase()}</li>
+            )
+          ) : (
+            <form className="category">
+              <input
+                type="text"
+                value={category.toLowerCase()}
+                onChange={handleChange}
+              ></input>
+            </form>
           )}
-          <li className="quantity">Quantity: {quantity}</li>
-          {/* {unitType && <li className='unitType'>Unit: { unitType.toLowerCase() }</li>} */}
 
-          <li className="notifyWhen">Notify When? {notifyWhen}</li>
-
-          {/* {expirationDate && <li className='expirationDate'>Expiration date: { formatExpirationDate(expirationDate) }</li>} */}
+          {isEditing ? (
+            <li className="quantity">Quantity: {quantity}</li>
+          ) : (
+            <form className="quantity">
+              <input
+                type="number"
+                value={quantity}
+                onChange={handleChange}
+              ></input>
+            </form>
+          )}
+          {isEditing ? (
+            <li className="notifyWhen">Notify When? {notifyWhen}</li>
+          ) : (
+            <form className="notifyWhen">
+              <input
+                type="number"
+                value={notifyWhen}
+                onChange={handleChange}
+              ></input>
+            </form>
+          )}
         </ul>
         <div className="button-container">
           <button
-            onClick={handleClick}
+            onClick={handleIsEditing}
             disabled={buttonDisabled}
             className="update-button"
           >
