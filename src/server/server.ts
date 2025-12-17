@@ -20,8 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 export const PORT: string | number = process.env.PORT || 3000;
 
 const uri =
-  process.env.MONGO_URI ||
-  "mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0";
+  process.env.MONGO_URI 
+  // ||
+  // "mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0";
 
 export const connectDb = async () => {
   try {
