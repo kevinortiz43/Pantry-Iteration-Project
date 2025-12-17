@@ -104,10 +104,11 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
           type='date'
           placeholder='Expiration Date'
         /> */}
-
-        <button disabled={isSubmitting} type="submit">
+      <div className="submit-btn-container">
+        <button disabled={isSubmitting} type="submit" className="submit-btn">
           {isSubmitting ? "Filling your pantry!" : "Submit"}
         </button>
+      </div>
       </form>
     </>
   );

@@ -9,7 +9,7 @@ const CreatePantryItemContainer = ({
     <div className="create-container">
       <div className="create-container-title-form">
         <div className="create-container-title">
-          <Plus />
+          <Plus strokeWidth={1.25} />
           <p>Add A New Item</p>
         </div>
         <div className="form-container">

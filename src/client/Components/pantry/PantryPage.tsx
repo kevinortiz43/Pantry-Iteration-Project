@@ -19,7 +19,7 @@ const PantryPage = () => {
             </section>
 
             <section>
-                <h2>Current Items</h2>
+                <h2>Current Items:</h2>
                 <PantryItemContainer refreshKey={refreshKey}/>
             </section>
         </div>

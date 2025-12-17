@@ -7,13 +7,13 @@
   color: #212936; 
 }
 
-#root {
+/* #root {
   max-width: 1280px;
-}
+} */
 
 body {
   display: flex;
-  min-width: 320px;
+  /* min-width: 320px; */
   min-height: 100vh;
   margin: 0;
   padding: 0;
