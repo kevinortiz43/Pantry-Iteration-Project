@@ -13,12 +13,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT: string | number = process.env.PORT || 3000;
+export const PORT: string | number = process.env.PORT || 3000;
 
 const uri = process.env.MONGO_URI;
 
 export const connectDb = async () => {
   try {
+    await mongoose.connect(String("mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0"));
     await mongoose.connect(String(uri));
     console.log("connected to mongo db testing ");
   } catch (error) {
@@ -105,7 +106,7 @@ pantryRouter.post(
 //   return res.status(errorObj.status).json(errorObj.message);
 // });
 
-app.listen(PORT, () => {
+export default app.listen(PORT, () => {
     console.log(`${process.env.PORT}`)
   console.log(`Server is running on PORT: ${PORT}`);
 });
