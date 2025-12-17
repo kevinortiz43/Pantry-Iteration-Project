@@ -1,9 +1,13 @@
-import dotenv from 'dotenv';
-import express, { type Express, type Request, type Response, type NextFunction } from 'express';
-import cors from 'cors';
-import mongoose from 'mongoose';
-import pantryController from './controllers/pantryController.ts';
-
+import dotenv from "dotenv";
+import express, {
+  type Express,
+  type Request,
+  type Response,
+  type NextFunction,
+} from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import pantryController from "./controllers/pantryController.ts";
 
 dotenv.config();
 
@@ -15,11 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 
 export const PORT: string | number = process.env.PORT || 3000;
 
-const uri = process.env.MONGO_URI;
+const uri =
+  process.env.MONGO_URI ||
+  "mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0";
 
 export const connectDb = async () => {
   try {
-    await mongoose.connect(String("mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0"));
     await mongoose.connect(String(uri));
     console.log("connected to mongo db testing ");
   } catch (error) {
@@ -31,14 +36,14 @@ connectDb();
 const pantryRouter = express.Router();
 
 //home page
-app.use('/', pantryRouter);
+app.use("/", pantryRouter);
 
-//getPantryItem */ 
+//getPantryItem */
 
 //  WORKS in Postman
 // GET by item name
 pantryRouter.get(
-  '/:name',
+  "/:name",
   pantryController.getPantryItem,
   (req: Request, res: Response) => {
     res.status(200).json(res.locals.pantryItem);
@@ -48,7 +53,7 @@ pantryRouter.get(
 // WORKS in Postman
 //GET full inventory
 pantryRouter.get(
-  '/',
+  "/",
   pantryController.getPantryInventory,
   (req: Request, res: Response) => {
     res.status(200).json(res.locals.inventory);
@@ -58,7 +63,7 @@ pantryRouter.get(
 // WORKS in Postman
 //patch update item by name
 pantryRouter.patch(
-  '/:name',
+  "/:name",
   pantryController.updatePantryItem,
   (req: Request, res: Response) => {
     res.status(201).json(res.locals.updatedPantryItem);
@@ -68,7 +73,7 @@ pantryRouter.patch(
 // WORKS in Postman
 //DELETE item by nasme
 pantryRouter.delete(
-  '/:name',
+  "/:name",
   pantryController.deletePantryItem,
   (req, res, next) => {
     res
@@ -80,7 +85,7 @@ pantryRouter.delete(
 // WORKS in Postman
 //create item
 pantryRouter.post(
-  '/create',
+  "/create",
   pantryController.createPantryItem,
   (req: Request, res: Response) => {
     res.status(201).json(res.locals.newPantryItem);
@@ -107,6 +112,6 @@ pantryRouter.post(
 // });
 
 export default app.listen(PORT, () => {
-    console.log(`${process.env.PORT}`)
+  console.log(`${process.env.PORT}`);
   console.log(`Server is running on PORT: ${PORT}`);
 });
