@@ -1,37 +1,58 @@
+
 .pantry-container {
-background-color: var(--primary-action-color);
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 50px;
+  row-gap: 40px;
 }
+
+h2 {
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+
 
 .pantry-card {
- padding: 2em;
- background: var(--background-color);
- border-radius: 8px;
- box-shadow: 0 2px 8px rgba(0, 0,0,0.1);
- color: var(--text-icons-color);
- width: 70%;
- max-width: 400px;
- margin: 20px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  height: 186px;
+  padding: 8px 12px;
+  padding-left: 20px;
 }
- ul {
-    list-style-type: none;
- }
 
- .button-container {
-    display: flex;
-    justify-content: space-between;
- }
- .button {
-    padding: .35em;
-    margin-right: 2em;
-    margin-left: 2em;
-    margin-top: 1em;
-    background: var(--secondary-background-color);
-    color: var(--background-color);
-    border-radius: .5em;;
- }
 
- 
+ul {
+  list-style-type: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.x-button-container {
+  display: flex;
+  justify-content: end;
+  margin-bottom: -10px;
+}
+
+.x-button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.update-button {
+  padding: 8px 22px;
+  border-radius: 10px;
+  border: none;
+  background-color: #d6ccc4;
+  color: #6b6259;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+}
+

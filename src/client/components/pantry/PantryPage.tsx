@@ -15,12 +15,11 @@ const PantryPage = () => {
     return (
         <div>
             <section>
-                <h2>Add new item</h2>
                 <CreatePantryItemContainer onItemCreated={handleItemCreated}/>
             </section>
 
             <section>
-                <h2>Current Items</h2>
+                <h2>Current Items:</h2>
                 <PantryItemContainer refreshKey={refreshKey}/>
             </section>
         </div>

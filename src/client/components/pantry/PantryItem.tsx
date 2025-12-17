@@ -1,4 +1,5 @@
-import './pantry.css';
+import { X } from "lucide-react";
+import "./pantry.css";
 
 interface PantryItemType {
   _id?: string;
@@ -32,38 +33,59 @@ interface PantryItemProps {
 
 const PantryItem = ({ pantryItem }: PantryItemProps) => {
   // deconstruct pantryItem
-  const { name, category, quantity, notifyWhen, onButtonClick, buttonDisabled = false } =
-  // const { name, category, quantity, unitType, threshold, onButtonClick, buttonDisabled = false } =
-  pantryItem;
-
+  const {
+    name,
+    category,
+    quantity,
+    notifyWhen,
+    onButtonClick,
+    buttonDisabled = false,
+  } =
+    // const { name, category, quantity, unitType, threshold, onButtonClick, buttonDisabled = false } =
+    pantryItem;
 
   const handleClick = () => {
     if (onButtonClick) {
       onButtonClick();
     }
     console.log("button works");
-  }
+  };
   return (
     <>
-      <article className='pantry-card'>
-
-        <h3 className='name'> {name.toUpperCase()}</h3>
-        <ul className='listItems'>
-          {category && <li className='category'>Category: {category.toLowerCase()}</li>}
-          <li className='quantity'>Quantity: {quantity}</li>
+      <article className="pantry-card">
+        <div className="x-button-container">
+          <button
+            onClick={handleClick}
+            disabled={buttonDisabled}
+            className="x-button"
+          >
+            <X strokeWidth={1.25} />
+          </button>
+        </div>
+        <h3 className="name"> {name.toUpperCase()}</h3>
+        <ul className="listItems">
+          {category && (
+            <li className="category">Category: {category.toLowerCase()}</li>
+          )}
+          <li className="quantity">Quantity: {quantity}</li>
           {/* {unitType && <li className='unitType'>Unit: { unitType.toLowerCase() }</li>} */}
-          {notifyWhen && <li className='notifyWhen'>Buy more if you have less than {notifyWhen}</li>}
+
+          <li className="notifyWhen">Notify When? {notifyWhen}</li>
+
           {/* {expirationDate && <li className='expirationDate'>Expiration date: { formatExpirationDate(expirationDate) }</li>} */}
         </ul>
         <div className="button-container">
-          <button onClick={handleClick}
+          <button
+            onClick={handleClick}
             disabled={buttonDisabled}
-            className="button">Update Item</button>
-          <button onClick={handleClick}
+            className="update-button"
+          >
+            Update
+          </button>
+          {/* <button onClick={handleClick}
             disabled={buttonDisabled}
-            className="button">Delete Item</button>
+            className="button">Delete Item</button> */}
         </div>
-
       </article>
     </>
   );
