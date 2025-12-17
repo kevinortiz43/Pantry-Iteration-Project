@@ -17,6 +17,8 @@ interface PantryItemType {
 
 interface PantryItemProps {
   pantryItem: PantryItemType;
+  pantryItemName: PantryItemType["name"];
+  onItemDeleted: PantryItemType["onButtonClick"];
 }
 
 // function to convert Date to a React readable format
@@ -31,7 +33,7 @@ interface PantryItemProps {
 //   }).format(date);
 // };
 
-const PantryItem = ({ pantryItem }: PantryItemProps) => {
+const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
   // deconstruct pantryItem
   const {
     name,
@@ -44,6 +46,23 @@ const PantryItem = ({ pantryItem }: PantryItemProps) => {
     // const { name, category, quantity, unitType, threshold, onButtonClick, buttonDisabled = false } =
     pantryItem;
 
+  const deleteItemClick = async (name: string) => {
+    console.log(name);
+
+    try {
+      await fetch(`http://localhost:3000/${name}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+      });
+
+      onItemDeleted(); // increment to trigger refresh in useEffect()
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleClick = () => {
     if (onButtonClick) {
       onButtonClick();
@@ -55,8 +74,7 @@ const PantryItem = ({ pantryItem }: PantryItemProps) => {
       <article className="pantry-card">
         <div className="x-button-container">
           <button
-            onClick={handleClick}
-            disabled={buttonDisabled}
+            onClick={() => deleteItemClick(pantryItem.name)}
             className="x-button"
           >
             <X strokeWidth={1.25} />
@@ -82,9 +100,6 @@ const PantryItem = ({ pantryItem }: PantryItemProps) => {
           >
             Update
           </button>
-          {/* <button onClick={handleClick}
-            disabled={buttonDisabled}
-            className="button">Delete Item</button> */}
         </div>
       </article>
     </>

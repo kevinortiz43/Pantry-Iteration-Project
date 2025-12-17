@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import './pantry.css'
+import { useState, useEffect } from "react";
+import "./pantry.css";
 
-import PantryItem from './PantryItem.tsx';
+import PantryItem from "./PantryItem.tsx";
 
 interface PantryItemType {
   _id?: string;
@@ -10,20 +10,26 @@ interface PantryItemType {
   quantity: number;
   // unitType?: string;
   notifyWhen?: number;
+  onButtonClick?: () => void;
   // expirationDate?: string;
 }
 
-interface PantryItemContainerProps  {
+interface PantryItemContainerProps {
   refreshKey?: number;
-
+  pantryItem: PantryItemType;
+  pantryItemName: PantryItemType["name"];
+  onItemDeleted: PantryItemType["onButtonClick"];
 }
 
-const PantryItemContainer = ( {refreshKey = 0}: PantryItemContainerProps ) => {
+const PantryItemContainer = ({
+  refreshKey = 0,
+  onItemDeleted,
+}: PantryItemContainerProps) => {
   const [pItems, setPItems] = useState<PantryItemType[]>([]);
 
   useEffect(() => {
     async function getPantryItems() {
-      const response = await fetch('http://localhost:3000');
+      const response = await fetch("http://localhost:3000");
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
         console.error(message);
@@ -34,14 +40,19 @@ const PantryItemContainer = ( {refreshKey = 0}: PantryItemContainerProps ) => {
     }
     getPantryItems();
     return;
-  }, [refreshKey]); // trigger refresh 
+  }, [refreshKey]); // trigger refresh
 
   console.log(`Items: ${pItems}`);
 
   return (
-    <div className='pantry-container'>
+    <div className="pantry-container">
       {pItems.map((pItem) => (
-        <PantryItem key={pItem._id} pantryItem={pItem} />
+        <PantryItem
+          key={pItem._id}
+          pantryItem={pItem}
+          pantryItemName={pItem.name}
+          onItemDeleted={onItemDeleted}
+        />
       ))}
     </div>
   );

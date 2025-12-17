@@ -74,7 +74,10 @@ describe("POST fetch requests to '/' endpoint", async () => {
 
 describe("DELETE fetch requests at '/:name' endpoint", async () => {
   it("Clean up we will delete the latest item", async () => {
-    const response = await fetch(`${root}/${postTestData.name}`, {
+
+
+
+        const response = await fetch(`${root}/${postTestData.name}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json; charset=utf-8",

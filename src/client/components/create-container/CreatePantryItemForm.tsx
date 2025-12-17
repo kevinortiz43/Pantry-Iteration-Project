@@ -3,6 +3,8 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 // import { z } from 'zod';
 import "./createContainer.css";
 
+const PORT = 3000;
+
 //I'll go down a rabbit hole if I keep looking at data validation.
 // const schema = z.object({
 //   name: z.string().required("Item is required");
@@ -28,17 +30,18 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
   const {
     register,
     handleSubmit,
+
     setError,
     reset, // to clear form after submission
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<FormFields>();
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
+    // if (!data) return;
+    // Don't need a proxy set up in vite.config.ts because explicitly using full URL with http://localhost:3000/create in  fetch call. A proxy is only needed if want to make relative URL requests (like "/create") and have them automatically forwarded to your backend.
 
-// if (!data) return;
-// Don't need a proxy set up in vite.config.ts because explicitly using full URL with http://localhost:3000/create in  fetch call. A proxy is only needed if want to make relative URL requests (like "/create") and have them automatically forwarded to your backend.
     try {
-      const response = await fetch("http://localhost:3000/create", {
+      const response = await fetch(`http://localhost:${PORT}/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,11 +106,11 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
           type='date'
           placeholder='Expiration Date'
         /> */}
-      <div className="submit-btn-container">
-        <button disabled={isSubmitting} type="submit" className="submit-btn">
-          {isSubmitting ? "Filling your pantry!" : "Submit"}
-        </button>
-      </div>
+        <div className="submit-btn-container">
+          <button disabled={isSubmitting} type="submit" className="submit-btn">
+            {isSubmitting ? "Filling your pantry!" : "Submit"}
+          </button>
+        </div>
       </form>
     </>
   );
