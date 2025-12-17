@@ -48,6 +48,32 @@ input:focus {
   outline: none;
 }
 
+select {
+  appearance: none;
+  border-radius: 10px;
+  background-color: #e5e5e5;
+  height: 38px;
+  width: 100%;
+  padding: 0 12px;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+}
+
+select:required:invalid {
+  color: gray;
+}
+option[value=""][disabled] {
+  display: none;
+}
+option {
+  color: black;
+}
+
 .submit-btn-container {
   grid-column: 1 / -1;
   display: flex;
