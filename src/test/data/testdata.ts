@@ -1,5 +1,6 @@
 export const testData = [
   {
+    notifyWhen: 0,
     _id: "694035c7d3a7b87bd8e96448",
     name: "Banana",
     category: "Fruit",
@@ -9,6 +10,7 @@ export const testData = [
     __v: 0,
   },
   {
+    notifyWhen: 0,
     _id: "6940364dd3a7b87bd8e96454",
     name: "Oranges",
     category: "Fruit",
@@ -18,6 +20,7 @@ export const testData = [
     __v: 0,
   },
   {
+    notifyWhen: 0,
     _id: "69403692d3a7b87bd8e96458",
     name: "cookies ",
     category: "Dessert",
@@ -27,6 +30,7 @@ export const testData = [
     __v: 0,
   },
   {
+    notifyWhen: 0,
     _id: "6940371cd3a7b87bd8e96462",
     name: "Apples",
     category: "Fruit",
@@ -36,6 +40,7 @@ export const testData = [
     __v: 0,
   },
   {
+    notifyWhen: 0,
     _id: "69403969d3a7b87bd8e9646a",
     name: "apple juice",
     category: "juice",
@@ -45,6 +50,7 @@ export const testData = [
     __v: 0,
   },
   {
+    notifyWhen: 0,
     _id: "69405ede2ac0cd4260683630",
     name: "banana",
     category: "Fruit",
@@ -54,6 +60,7 @@ export const testData = [
     __v: 0,
   },
   {
+    notifyWhen: 0,
     _id: "69417e2893d9cc363aa4bd06",
     name: "Dessert",
     category: "1",
@@ -61,10 +68,25 @@ export const testData = [
     __v: 0,
   },
   {
+    notifyWhen: 0,
     _id: "69418d6fe26e59beb8c3c68d",
     name: "carrots",
     category: "veggie",
     quantity: 2,
     __v: 0,
   },
+  {
+    notifyWhen: 0,
+    _id: "6942c6220e023d70678f64ff",
+    name: "grapes",
+    category: "fruit",
+    quantity: 2,
+    __v: 0,
+  },
 ];
+export const postTestData = {
+  name: "TEST Banana",
+  category: "Fruit",
+  quantity: 2,
+  notifyWhen: 1,
+};

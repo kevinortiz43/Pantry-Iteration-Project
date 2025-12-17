@@ -1,13 +1,9 @@
-import dotenv from "dotenv";
-import express, {
-  type Express,
-  type Request,
-  type Response,
-  type NextFunction,
-} from "express";
-import cors from "cors";
-import mongoose from "mongoose";
-import pantryController from "./controllers/pantryController.ts";
+import dotenv from 'dotenv';
+import express, { type Express, type Request, type Response, type NextFunction } from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import pantryController from './controllers/pantryController.ts';
+
 
 dotenv.config();
 
@@ -23,11 +19,8 @@ const uri = process.env.MONGO_URI;
 
 export const connectDb = async () => {
   try {
-    await mongoose.connect(
-      "mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0"
-    );
+    await mongoose.connect(String("mongodb+srv://kevinortiz4300_db_user:BfrxDEGwDI2ZijjZ@cluster0.ozg4tp5.mongodb.net/?appName=Cluster0"));
     console.log("connected to mongo db testing ");
-    console.log(process.env.MONGO_URI);
   } catch (error) {
     console.log("Error connecting to MONGODB", error);
     process.exit(1); // exit with failure
@@ -37,45 +30,44 @@ connectDb();
 const pantryRouter = express.Router();
 
 //home page
-app.use("/", pantryRouter);
+app.use('/', pantryRouter);
 
-//getPantryItem */
+//getPantryItem */ 
+
+//  WORKS in Postman
+// GET by item name
 pantryRouter.get(
-  "/:name",
+  '/:name',
   pantryController.getPantryItem,
   (req: Request, res: Response) => {
     res.status(200).json(res.locals.pantryItem);
   }
 );
 
-//getting the full inventory
+// WORKS in Postman
+//GET full inventory
 pantryRouter.get(
-  "/",
+  '/',
   pantryController.getPantryInventory,
   (req: Request, res: Response) => {
     res.status(200).json(res.locals.inventory);
   }
 );
-pantryRouter.get(
-  "/",
-  pantryController.getPantryInventory,
-  (req: Request, res: Response) => {
-    res.status(200).json("testing get request" + res.locals.inventory);
-  }
-);
 
-//updating pantry items
+// WORKS in Postman
+//patch update item by name
 pantryRouter.patch(
-  "/:name",
+  '/:name',
   pantryController.updatePantryItem,
   (req: Request, res: Response) => {
     res.status(201).json(res.locals.updatedPantryItem);
   }
 );
 
-//delete pantry item
+// WORKS in Postman
+//DELETE item by nasme
 pantryRouter.delete(
-  "/:name",
+  '/:name',
   pantryController.deletePantryItem,
   (req, res, next) => {
     res
@@ -84,18 +76,10 @@ pantryRouter.delete(
   }
 );
 
-//redirecting to full inventory
-pantryRouter.get(
-  "/inventory",
-  pantryController.getPantryInventory,
-  (req: Request, res: Response) => {
-    res.redirect("/");
-  }
-);
-
-//create pantry item
+// WORKS in Postman
+//create item
 pantryRouter.post(
-  "/create",
+  '/create',
   pantryController.createPantryItem,
   (req: Request, res: Response) => {
     res.status(201).json(res.locals.newPantryItem);
@@ -103,25 +87,25 @@ pantryRouter.post(
 );
 
 //health check
-app.get("/health", (_req: Request, res: Response) => {
-  res.status(200).send("Server is running");
-});
+// app.get('/health', (_req: Request, res: Response) => {
+//   res.status(200).send('Server is running');
+// });
 
-app.use((req, res) =>
-  res.status(404).send("This is not the page you're looking for...")
-);
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  const defaultErr = {
-    log: "Express error handler caught unknown middleware error",
-    status: 500,
-    message: { err: "An error occurred" },
-  };
-  const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
-  return res.status(errorObj.status).json(errorObj.message);
-});
+// app.use((req, res) =>
+//   res.status(404).send("This is not the page you're looking for...")
+// );
+// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+//   const defaultErr = {
+//     log: 'Express error handler caught unknown middleware error',
+//     status: 500,
+//     message: { err: 'An error occurred' },
+//   };
+//   const errorObj = Object.assign({}, defaultErr, err);
+//   console.log(errorObj.log);
+//   return res.status(errorObj.status).json(errorObj.message);
+// });
 
 export default app.listen(PORT, () => {
-  console.log(`${process.env.PORT}`);
+    console.log(`${process.env.PORT}`)
   console.log(`Server is running on PORT: ${PORT}`);
 });
