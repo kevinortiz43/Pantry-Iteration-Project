@@ -79,6 +79,7 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
             required: true,
           })}
           required
+          defaultValue=""
         >
           {/* <input type="text" placeholder="Category" /> */}
             <option value="" disabled selected>
