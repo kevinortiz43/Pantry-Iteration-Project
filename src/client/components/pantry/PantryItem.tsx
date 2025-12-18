@@ -63,14 +63,13 @@ const PantryItem = ({ pantryItem }: PantryItemProps) => {
           </button>
         </div>
         <h3 className="name"> {name.toUpperCase()}</h3>
-        <ul className="listItems">
-          {category && (
+        <ul className="listItems">{category && (
             <li className="category">Category: {category.toLowerCase()}</li>
           )}
           <li className="quantity">Quantity: {quantity}</li>
           {/* {unitType && <li className='unitType'>Unit: { unitType.toLowerCase() }</li>} */}
 
-          <li className="notifyWhen">Notify When? {notifyWhen}</li>
+          <li className="notifyWhen">Notify When: {notifyWhen}</li>
 
           {/* {expirationDate && <li className='expirationDate'>Expiration date: { formatExpirationDate(expirationDate) }</li>} */}
         </ul>
