@@ -54,10 +54,11 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
     }
   };
 
-  const handleSubmit = async (e: FormEvent) => { // prevent default frontend beh with form submission so that it won't possibly refresh while user is in middle of filling out form
+  const handleSubmit = async (e: FormEvent) => {
+    // prevent default frontend beh with form submission so that it won't possibly refresh while user is in middle of filling out form
     e.preventDefault();
 
-    const updatedItem = { 
+    const updatedItem = {
       ...pantryItem, // make copy of existing pantryItem properties
       name: updateName, // then add the props that might be updated
       category: updateCategory,
@@ -75,7 +76,7 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
       });
 
       if (response.ok) {
-        setIsEditing(false); // return isEditing back to false (off) 
+        setIsEditing(false); // return isEditing back to false (off)
         onItemDeleted(); // trigger increment to trigger refresh key
       }
     } catch (error) {
@@ -103,7 +104,8 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
             className="form-input"
           />
         </form>
-      ) : ( // otherwise just show existing prop's value
+      ) : (
+        // otherwise just show existing prop's value
         <h3 className="name">{name.toUpperCase()}</h3>
       )}
 
@@ -159,14 +161,14 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
             <button
               type="submit"
               onClick={handleSubmit} // this triggers PATCH
-              className="save-button"
+              className="update-button"
             >
               Save
             </button>
 
             <button
               onClick={() => setIsEditing(false)} // with cancel, we turn back isEditing to false (off)
-              className="cancel-button"
+              className="update-button"
             >
               Cancel
             </button>
