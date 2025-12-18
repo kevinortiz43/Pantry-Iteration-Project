@@ -111,7 +111,7 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
           <input
             type="text"
             value={updateName}
-            onChange={(e) => setUpdateName(e.target.value)} // on event, change state for each property
+            onChange={(e) => setUpdateName(e.target.value.toUpperCase())} // on event, change state for each property
             className="form-input"
           />
         </form>
@@ -122,19 +122,32 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
 
       <ul className="listItems">
         {isEditing ? (
-          <li className="form-field">
-            <input
-              type="text"
-              value={updateCategory}
-              onChange={(e) => setUpdateCategory(e.target.value)}
-              placeholder="Category"
-              className="form-input"
-            />
-          </li>
+<li className="form-field">
+  <select
+    value={updateCategory}
+    onChange={(e) => setUpdateCategory(e.target.value)}
+    className="form-input"
+    required
+  >
+    <option value="" disabled>
+      Categories
+    </option>
+    <option value="Beverages">Beverages</option>
+    <option value="Dairy & Eggs">Dairy & Eggs</option>
+    <option value="Fruit">Fruit</option>
+    <option value="Frozen Foods">Frozen Foods</option>
+    <option value="Meat and Poultry">Meat and Poultry</option>
+    <option value="Canned & Dry Goods">Canned & Dry Goods</option>
+    <option value="Prepared & Deli Foods">Prepared & Deli Food</option>
+    <option value="Produce">Produce</option>
+    <option value="Seafood">Seafood</option>
+    <option value="Snacks & Sweets">Snacks & Sweets</option>
+    <option value="Vegetables">Vegetables</option>
+    <option value="Other">Other</option>
+  </select>
+</li>
         ) : (
-          category && (
-            <li className="category">Category: {category}</li>
-          )
+          category && <li className="category">Category: {category}</li>
         )}
 
         {isEditing ? (

@@ -1,14 +1,10 @@
 import PantryItem from "../models/pantryModel";
-import { ErrorRequestHandler, Request, Response, NextFunction } from "express";
-import { body, validationResult } from "express-validator";
+import type { Request, Response, NextFunction } from "express";
+import { validationResult } from "express-validator";
 
 //create controller
 const pantryController = {
-  async createPantryItem(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async createPantryItem(req: Request, res: Response, next: NextFunction) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return next({
@@ -54,18 +50,14 @@ const pantryController = {
         notifyWhen: data.notifyWhen,
       });
       res.locals.newPantryItem = newPantryItem;
-      return  res.status(201).json(newPantryItem);
+      return res.status(201).json(newPantryItem);
     } catch (err) {
       return next(err);
     }
   },
 
   //get individual pantry item: getPantryItem
-  async getPantryItem(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async getPantryItem(req: Request, res: Response, next: NextFunction) {
     try {
       const name = req.params.name;
       console.log(req.params["name"]);
@@ -76,11 +68,7 @@ const pantryController = {
     }
   },
   //get entire inventory: getPantryInventory
-  async getPantryInventory(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async getPantryInventory(_req: Request, res: Response, next: NextFunction) {
     try {
       const inventory = await PantryItem.find({});
       // res.locals.inventory = inventory;
@@ -92,11 +80,7 @@ const pantryController = {
   },
 
   //update: patch
-  async updatePantryItem(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async updatePantryItem(req: Request, res: Response, next: NextFunction) {
     try {
       const currentItem = req.params.name;
       const updates = req.body;
@@ -121,11 +105,7 @@ const pantryController = {
     }
   },
 
-  async deletePantryItem(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
+  async deletePantryItem(req: Request, res: Response, next: NextFunction) {
     try {
       const name = req.params.name;
       const deletedPantryItem = await PantryItem.findOneAndDelete({
