@@ -20,7 +20,7 @@ const PantryPage = () => {
 
             <section>
                 <h2>Current Items:</h2>
-                <PantryItemContainer refreshKey={refreshKey}/>
+                <PantryItemContainer refreshKey={refreshKey} onItemDeleted={handleItemCreated}/>
             </section>
         </div>
     )
