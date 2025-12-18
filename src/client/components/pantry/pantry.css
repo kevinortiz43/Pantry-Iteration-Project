@@ -64,19 +64,31 @@ input {
 }
 
 .form-input {
-transform: translate(20%, 0%);
-  border-radius: 10px;
+  transform: translate(20%, 0%);
+  border-radius: 6px;
   background-color: #e5e5e5;
   height: 27px;
-  width: 70%;
-  padding: 0 12px;
+  width: 72%;
+  padding: 0 9px;
   border: none;
   font-size: 0.9rem;
-  padding-bottom: 4px;
-
+  padding-bottom: 5px; 
 }
 
+/* UPDATE CONTAINER */
 
-update-button{
-  
+.save-cancel-container{
+  display: flex;
+  gap: 14px;
+}
+
+.save-cancel-buttons{
+  padding: 6px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #d6ccc4;
+  color: #6b6259;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
 }

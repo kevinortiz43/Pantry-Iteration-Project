@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { X } from "lucide-react";
 import "./pantry.css";
 
@@ -18,7 +18,7 @@ interface PantryItemProps {
   onItemDeleted: PantryItemType["onButtonClick"];
 }
 
-const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
+const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => { // onItemDeleted is passed down from PantryPage.tsx, runs (increments) to trigger page refresh
   const {
     name,
     category,
@@ -47,7 +47,7 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
       });
 
       if (response.ok) {
-        onItemDeleted(); // trigger increment to trigger refresh key
+        onItemDeleted(); // trigger increment to trigger page refresh
       }
     } catch (error) {
       console.log(error);
@@ -77,13 +77,13 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
 
       if (response.ok) {
         setIsEditing(false); // return isEditing back to false (off)
-        onItemDeleted(); // trigger increment to trigger refresh key
+        onItemDeleted(); // trigger increment to trigger page refresh
       }
     } catch (error) {
       console.log(error);
     }
   };
-
+//deleteItemClick triggers DELETE, which also triggers increment function (that triggers page refresh) 
   return (
     <article className="pantry-card">
       <div className="x-button-container">
@@ -96,7 +96,8 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
       </div>
 
       {isEditing ? ( // if isEditing truthy / on (they click on it, since it starts false / off) then open form
-        <form onSubmit={handleSubmit} className="name-form">
+      // handleSubmit triggers PATCH, which also triggers increment function (that triggers page refresh)
+        <form onSubmit={handleSubmit} className="name-form"> 
           <input
             type="text"
             value={updateName}
@@ -151,28 +152,28 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
             />
           </li>
         ) : (
-          <li className="notifyWhen">Notify When? {notifyWhen}</li>
+          <li className="notifyWhen">Notify When: {notifyWhen}</li>
         )}
       </ul>
 
       <div className="button-container">
         {isEditing ? ( // if isEditing truthy (user clicks on it), then we see Save and Cancel buttons
-          <>
+          <div className="save-cancel-container">
             <button
               type="submit"
-              onClick={handleSubmit} // this triggers PATCH
-              className="update-button"
+              onClick={handleSubmit} // this triggers PATCH, which also triggers increment function (that triggers page refresh)
+              className="save-cancel-buttons"
             >
               Save
             </button>
 
             <button
               onClick={() => setIsEditing(false)} // with cancel, we turn back isEditing to false (off)
-              className="update-button"
+              className="save-cancel-buttons"
             >
               Cancel
             </button>
-          </>
+          </div>
         ) : (
           <button
             onClick={handleIsEditing} // Update button toggles isEditing state true / false (on / off)
