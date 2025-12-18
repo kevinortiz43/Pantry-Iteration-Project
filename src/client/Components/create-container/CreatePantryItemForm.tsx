@@ -74,14 +74,16 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
           type="text"
           placeholder="Name"
         />
-        <label
+        <select
           {...register("category", {
             required: true,
           })}
+          required
         >
           {/* <input type="text" placeholder="Category" /> */}
-          <select required>
-  
+            <option value="" disabled selected>
+              Categories
+            </option>
             <option value="Beverages">Beverages</option>
             <option value="Dairy & Eggs">Dairy & Eggs</option>
             <option value="Fruit">Fruit</option>
@@ -96,8 +98,8 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
             <option value="Snacks & Sweets">Snacks & Sweets</option>
             <option value="Vegetables">Vegetables</option>
             <option value="Other">Other</option>
+
           </select>
-        </label>
 
         {/* To put as dropdown:
         <label> 
