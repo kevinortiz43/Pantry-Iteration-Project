@@ -92,7 +92,7 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
           <option value="Fruit">Fruit</option>
           <option value="Frozen Foods">Frozen Foods</option>
           <option value="Meat and Poultry">Meat and Poultry</option>
-          <option value="Pantry (Canned & Dry Goods)">
+          <option value="Canned & Dry Goods">
             Canned & Dry Goods
           </option>
           <option value="Prepared & Deli Foods">Prepared & Deli Food</option>
