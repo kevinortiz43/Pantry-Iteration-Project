@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { X } from "lucide-react";
+import { TriangleAlert, X } from "lucide-react";
 import "./pantry.css";
 
 interface PantryItemType {
@@ -18,7 +18,8 @@ interface PantryItemProps {
   onItemDeleted: PantryItemType["onButtonClick"];
 }
 
-const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => { // onItemDeleted is passed down from PantryPage.tsx, runs (increments) to trigger page refresh
+const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
+  // onItemDeleted is passed down from PantryPage.tsx, runs (increments) to trigger page refresh
   const {
     name,
     category,
@@ -83,10 +84,19 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => { // onIt
       console.log(error);
     }
   };
-//deleteItemClick triggers DELETE, which also triggers increment function (that triggers page refresh) 
+  //deleteItemClick triggers DELETE, which also triggers increment function (that triggers page refresh)
   return (
     <article className="pantry-card">
       <div className="x-button-container">
+        {quantity <= notifyWhen ? (
+          <div className="alert-notification">
+            <TriangleAlert size={15} strokeWidth={1.75} />
+            <p> Low Stock</p>
+          </div>
+        ) : (
+          <></>
+        )}
+
         <button
           onClick={() => deleteItemClick(pantryItem.name)}
           className="x-button"
@@ -96,8 +106,8 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => { // onIt
       </div>
 
       {isEditing ? ( // if isEditing truthy / on (they click on it, since it starts false / off) then open form
-      // handleSubmit triggers PATCH, which also triggers increment function (that triggers page refresh)
-        <form onSubmit={handleSubmit} className="name-form"> 
+        // handleSubmit triggers PATCH, which also triggers increment function (that triggers page refresh)
+        <form onSubmit={handleSubmit} className="name-form">
           <input
             type="text"
             value={updateName}

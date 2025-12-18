@@ -16,7 +16,7 @@ h2 {
   border-radius: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   width: 300px;
-  height: 186px;
+  height: 190px;
   padding: 8px 12px;
   padding-left: 20px;
 }
@@ -33,13 +33,25 @@ ul {
 .x-button-container {
   display: flex;
   justify-content: end;
-  margin-bottom: -10px;
+  margin-bottom: 1px;
+  gap: 5px;
 }
 
 .x-button {
   border: none;
   cursor: pointer;
   background-color: transparent;
+}
+
+.alert-notification {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background-color: #F1BB6F;
+  border-radius: 10px;
+  padding: 0px 6px;
+  padding-top: 1px;
+  font-size: 0.em;
 }
 
 .update-button {
