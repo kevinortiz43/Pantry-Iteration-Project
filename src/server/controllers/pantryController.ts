@@ -1,10 +1,9 @@
-import PantryItem from '../models/pantryModel';
-import { ErrorRequestHandler, Request, Response, NextFunction } from 'express';
-import { body, validationResult } from 'express-validator';
+import PantryItem from "../models/pantryModel";
+import { ErrorRequestHandler, Request, Response, NextFunction } from "express";
+import { body, validationResult } from "express-validator";
 
 //create controller
 const pantryController = {
- 
   async createPantryItem(
     req: Request,
     res: Response,
@@ -13,36 +12,40 @@ const pantryController = {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return next({
-        log: 'Missing required fields',
+        log: "Missing required fields",
         status: 400,
         message: { errors: errors.array() },
       });
     }
     try {
       const data = req.body;
-     
 
       // const {name, category, quantity, unitType, threshold, expirationDate} = req.body;
       //data validation for required items
-      if (!data.name || !data.category || !data.quantity || data.notifyWhen === undefined) {
-        return next('Enter the required information (name & quantity)');
+      if (
+        !data.name ||
+        !data.category ||
+        !data.quantity ||
+        data.notifyWhen === undefined
+      ) {
+        return next("Enter the required information (name & quantity)");
       }
       //data validation for data types
-    if (typeof data.quantity !== 'number' || data.quantity < 1) {
-      return next({
-        log: 'Invalid quantity',
-        status: 400,
-        message: 'Quantity must be a number greater than 0',
-      });
-    }
+      if (typeof data.quantity !== "number" || data.quantity < 1) {
+        return next({
+          log: "Invalid quantity",
+          status: 400,
+          message: "Quantity must be a number greater than 0",
+        });
+      }
 
-    if (typeof data.notifyWhen !== 'number' || data.notifyWhen < 0) {
-      return next({
-        log: 'Invalid notifyWhen value',
-        status: 400,
-        message: 'NotifyWhen must be a non-negative number',
-      });
-    }
+      if (typeof data.notifyWhen !== "number" || data.notifyWhen < 0) {
+        return next({
+          log: "Invalid notifyWhen value",
+          status: 400,
+          message: "NotifyWhen must be a non-negative number",
+        });
+      }
 
       const newPantryItem = await PantryItem.create({
         name: data.name,
@@ -51,11 +54,12 @@ const pantryController = {
         notifyWhen: data.notifyWhen,
       });
       res.locals.newPantryItem = newPantryItem;
-      return next();
+      return  res.status(201).json(newPantryItem);
     } catch (err) {
       return next(err);
     }
   },
+
   //get individual pantry item: getPantryItem
   async getPantryItem(
     req: Request,
@@ -64,9 +68,9 @@ const pantryController = {
   ): Promise<void> {
     try {
       const name = req.params.name;
-      console.log(req.params['name']);
+      console.log(req.params["name"]);
       res.locals.pantryItem = await PantryItem.find({ name: name });
-      return next();
+      return res.status(200).json(res.locals.pantryItem);
     } catch (err) {
       return next(err);
     }
@@ -79,15 +83,15 @@ const pantryController = {
   ): Promise<void> {
     try {
       const inventory = await PantryItem.find({});
-      res.locals.inventory = inventory;
-      console.log('Inventory retrieved: ', inventory);
-      return next();
+      // res.locals.inventory = inventory;
+      console.log("Inventory retrieved: ", inventory);
+      return res.status(200).json(inventory);
     } catch (err) {
       return next(err);
     }
   },
 
-  //update: patch 
+  //update: patch
   async updatePantryItem(
     req: Request,
     res: Response,
@@ -110,9 +114,8 @@ const pantryController = {
         return;
       }
 
-
-      res.locals.updatedPantryItem = updatedPantryItem;
-      return next();
+      // res.locals.updatedPantryItem = updatedPantryItem;
+      return res.status(201).json(updatedPantryItem);
     } catch (err) {
       return next(err);
     }
@@ -135,7 +138,7 @@ const pantryController = {
       }
       console.log(`Deleted: ${deletedPantryItem}`);
       res.locals.deletedPantryItem = deletedPantryItem;
-      return next();
+      return res.status(200).json(deletedPantryItem);
     } catch (err) {
       return next(err);
     }

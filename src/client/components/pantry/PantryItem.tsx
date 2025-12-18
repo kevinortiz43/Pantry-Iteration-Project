@@ -123,7 +123,7 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => { // onIt
           </li>
         ) : (
           category && (
-            <li className="category">Category: {category.toLowerCase()}</li>
+            <li className="category">Category: {category}</li>
           )
         )}
 
