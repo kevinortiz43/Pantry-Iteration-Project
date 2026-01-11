@@ -18,12 +18,12 @@ interface PantryItemContainerProps {
   refreshKey?: number;
   pantryItem: PantryItemType;
   pantryItemName: PantryItemType["name"];
-  onItemDeleted: PantryItemType["onButtonClick"];
+  onItemChange: PantryItemType["onButtonClick"];
 }
 
 const PantryItemContainer = ({
   refreshKey = 0,
-  onItemDeleted, // pass this increment function from PantryPage.tsx (function used to trigger page refresh)
+  onItemChange, // pass this increment function from PantryPage.tsx (function used to trigger page refresh)
 }: PantryItemContainerProps) => {
   const [pItems, setPItems] = useState<PantryItemType[]>([]);
 
@@ -51,7 +51,7 @@ const PantryItemContainer = ({
           key={pItem._id}
           pantryItem={pItem}
           pantryItemName={pItem.name}
-          onItemDeleted={onItemDeleted} // pass down increment function prop so it's available in PantryItem.tsx
+          onItemChange={onItemChange} // pass down increment function prop so it's available in PantryItem.tsx
         />
       ))}
     </div>

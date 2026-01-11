@@ -15,11 +15,11 @@ interface PantryItemType {
 interface PantryItemProps {
   pantryItem: PantryItemType;
   pantryItemName: PantryItemType["name"];
-  onItemDeleted: PantryItemType["onButtonClick"];
+  onItemChange: PantryItemType["onButtonClick"];
 }
 
-const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
-  // onItemDeleted is passed down from PantryPage.tsx, runs (increments) to trigger page refresh
+const PantryItem = ({ pantryItem, onItemChange }: PantryItemProps) => {
+  // onItemChange is passed down from PantryPage.tsx, runs (increments) to trigger page refresh
   const {
     name,
     category,
@@ -48,7 +48,7 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
       });
 
       if (response.ok) {
-        onItemDeleted(); // trigger increment to trigger page refresh
+        onItemChange(); // trigger increment to trigger page refresh
       }
     } catch (error) {
       console.log(error);
@@ -78,7 +78,7 @@ const PantryItem = ({ pantryItem, onItemDeleted }: PantryItemProps) => {
 
       if (response.ok) {
         setIsEditing(false); // return isEditing back to false (off)
-        onItemDeleted(); // trigger increment to trigger page refresh
+        onItemChange(); // trigger increment to trigger page refresh
       }
     } catch (error) {
       console.log(error);

@@ -20,10 +20,10 @@ type FormFields = {
 
 // need to create a callback to notify parent component PantryPage.tsx
 interface CreatePantryItemFormProps {
-  onItemCreated?: () => void;
+  onItemChange?: () => void;
 }
 
-const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
+const CreatePantryItemForm = ({ onItemChange }: CreatePantryItemFormProps) => {
   // pass down prop from parent
 
   const {
@@ -54,8 +54,8 @@ const CreatePantryItemForm = ({ onItemCreated }: CreatePantryItemFormProps) => {
       const result = await response.json();
       console.log("Response: ", result);
 
-      if (onItemCreated) {
-        onItemCreated();
+      if (onItemChange) {
+        onItemChange();
       }
 
       reset();

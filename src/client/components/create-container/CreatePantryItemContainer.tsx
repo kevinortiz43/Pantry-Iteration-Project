@@ -5,7 +5,7 @@ import CreatePantryItemForm from "./CreatePantryItemForm";
 
 
 const CreatePantryItemContainer = ({
-  onItemCreated,
+  onItemChange,
 }: CreateItemContainerProps) => {
   return (
     <div className="create-container">
@@ -15,7 +15,7 @@ const CreatePantryItemContainer = ({
           <p>Add A New Item</p>
         </div>
         <div className="form-container">
-          <CreatePantryItemForm onItemCreated={onItemCreated} />
+          <CreatePantryItemForm onItemChange={onItemChange} />
         </div>
       </div>
     </div>
